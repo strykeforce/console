@@ -1,48 +1,45 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.Button;
+import frc.robot.commands.ConsoleCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.strykeforce.console.Console.Switch;
+import org.strykeforce.console.ConsoleSubsystem;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
+
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private static final Logger logger = LoggerFactory.getLogger(RobotContainer.class);
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  private final ConsoleSubsystem consoleSubsystem = new ConsoleSubsystem(true);
+
   public RobotContainer() {
-    // Configure the button bindings
     configureButtonBindings();
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
-  private void configureButtonBindings() {}
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
+  private void configureButtonBindings() {
+    consoleSubsystem.getButton(Switch.CENTER).whenPressed(new ConsoleCommand("CENTER", consoleSubsystem));
+    consoleSubsystem.getButton(Switch.NORTH).whenPressed(new ConsoleCommand("NORTH", consoleSubsystem));
+    consoleSubsystem.getButton(Switch.SOUTH).whenPressed(new ConsoleCommand("SOUTH", consoleSubsystem));
+    consoleSubsystem.getButton(Switch.EAST).whenPressed(new ConsoleCommand("EAST", consoleSubsystem));
+    consoleSubsystem.getButton(Switch.WEST).whenPressed(new ConsoleCommand("WEST", consoleSubsystem));
+
+    new Button(RobotController::getUserButton)
+        .whenPressed(new InstantCommand(consoleSubsystem::clear, consoleSubsystem) {
+          @Override
+          public boolean runsWhenDisabled() {
+            return true;
+          }
+        });
+  }
+
+
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
 }
