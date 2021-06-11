@@ -25,8 +25,6 @@ public class ConsoleCommand extends InstantCommand {
           Switch.TWO, new Pair<>((128 - Switch.TWO.name().length() * FONT_WIDTH ) / 2, 48),
           Switch.THREE, new Pair<>(92, 48));
 
-  private final static int Y = 16;
-
 
   public ConsoleCommand(Switch consoleSwitch, boolean on, ConsoleSubsystem consoleSubsystem) {
     super(() -> {
