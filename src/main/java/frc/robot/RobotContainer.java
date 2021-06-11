@@ -23,11 +23,50 @@ public class RobotContainer {
 
 
   private void configureButtonBindings() {
-    consoleSubsystem.getButton(Switch.CENTER).whenPressed(new ConsoleCommand("CENTER", consoleSubsystem));
-    consoleSubsystem.getButton(Switch.NORTH).whenPressed(new ConsoleCommand("NORTH", consoleSubsystem));
-    consoleSubsystem.getButton(Switch.SOUTH).whenPressed(new ConsoleCommand("SOUTH", consoleSubsystem));
-    consoleSubsystem.getButton(Switch.EAST).whenPressed(new ConsoleCommand("EAST", consoleSubsystem));
-    consoleSubsystem.getButton(Switch.WEST).whenPressed(new ConsoleCommand("WEST", consoleSubsystem));
+    consoleSubsystem.getButton(Switch.CENTER)
+        .whenPressed(new ConsoleCommand(Switch.CENTER, true, consoleSubsystem));
+    consoleSubsystem.getButton(Switch.CENTER)
+        .whenReleased(new ConsoleCommand(Switch.CENTER, false, consoleSubsystem));
+
+    consoleSubsystem.getButton(Switch.NORTH)
+        .whenPressed(new ConsoleCommand(Switch.NORTH, true, consoleSubsystem));
+    consoleSubsystem.getButton(Switch.NORTH)
+        .whenReleased(new ConsoleCommand(Switch.NORTH, false, consoleSubsystem));
+
+    consoleSubsystem.getButton(Switch.SOUTH)
+        .whenPressed(new ConsoleCommand(Switch.SOUTH, true, consoleSubsystem));
+    consoleSubsystem.getButton(Switch.SOUTH)
+        .whenReleased(new ConsoleCommand(Switch.SOUTH, false, consoleSubsystem));
+
+    consoleSubsystem.getButton(Switch.EAST)
+        .whenPressed(new ConsoleCommand(Switch.EAST, true, consoleSubsystem));
+    consoleSubsystem.getButton(Switch.EAST)
+        .whenReleased(new ConsoleCommand(Switch.EAST, false, consoleSubsystem));
+
+    consoleSubsystem.getButton(Switch.WEST)
+        .whenPressed(new ConsoleCommand(Switch.WEST, true, consoleSubsystem));
+    consoleSubsystem.getButton(Switch.WEST)
+        .whenReleased(new ConsoleCommand(Switch.WEST, false, consoleSubsystem));
+
+    consoleSubsystem.getButton(Switch.NORTH)
+        .whenPressed(new ConsoleCommand(Switch.NORTH, true, consoleSubsystem));
+    consoleSubsystem.getButton(Switch.NORTH)
+        .whenReleased(new ConsoleCommand(Switch.NORTH, false, consoleSubsystem));
+
+    consoleSubsystem.getButton(Switch.ONE)
+        .whenPressed(new ConsoleCommand(Switch.ONE, true, consoleSubsystem));
+    consoleSubsystem.getButton(Switch.ONE)
+        .whenReleased(new ConsoleCommand(Switch.ONE, false, consoleSubsystem));
+
+    consoleSubsystem.getButton(Switch.TWO)
+        .whenPressed(new ConsoleCommand(Switch.TWO, true, consoleSubsystem));
+    consoleSubsystem.getButton(Switch.TWO)
+        .whenReleased(new ConsoleCommand(Switch.TWO, false, consoleSubsystem));
+
+    consoleSubsystem.getButton(Switch.THREE)
+        .whenPressed(new ConsoleCommand(Switch.THREE, true, consoleSubsystem));
+    consoleSubsystem.getButton(Switch.THREE)
+        .whenReleased(new ConsoleCommand(Switch.THREE, false, consoleSubsystem));
 
     new Button(RobotController::getUserButton)
         .whenPressed(new InstantCommand(consoleSubsystem::clear, consoleSubsystem) {
